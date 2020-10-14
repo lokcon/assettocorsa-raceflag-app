@@ -1,0 +1,3 @@
+stdlib/*.pyd
+stdlib64/*.pyd
+sim_info.py
