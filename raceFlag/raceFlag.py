@@ -24,7 +24,7 @@ PADDING = 5
 # Configs
 WINDOW_WIDTH = 160
 WINDOW_HEIGHT = 120
-BACKGROUND_OPACITY = 0.5
+BACKGROUND_OPACITY = 0.3
 
 # Generate flags
 Flag = collections.namedtuple("Flag", ["name", "texture"])
@@ -74,6 +74,6 @@ def onWindowRender(deltaT):
 
     flag_value = info.graphics.flag
     texture_id = flag_textures[flag_value]
-    ac.glColor4f(1.0, 1.0, 1.0, 1.0)
+    ac.glColor4f(1.0, 1.0, 1.0, BACKGROUND_OPACITY)
     ac.glQuadTextured(0, 0, WINDOW_WIDTH, WINDOW_HEIGHT, texture_id)
 
