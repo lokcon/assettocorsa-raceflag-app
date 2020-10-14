@@ -3,21 +3,11 @@ import acsys
 import os
 import platform
 import sys
-
-"""
-"""
-
-"""Load shared libraries"""
-if platform.architecture()[0] == "64bit":
-  sysdir = "stdlib64"
-else:
-  sysdir = "stdlib"
-sys.path.insert(0, os.path.join(os.path.dirname(__file__), "lib", sysdir))
-sys.path.insert(0, os.path.join(os.path.dirname(__file__), "lib"))
-os.environ['PATH'] = os.environ['PATH'] + ";."
+load_shared_libraries()
 from sim_info import info
 
-# Flag values
+
+# Flag values (from ctypes used by Assetto Corsa shared memory)
 AC_NO_FLAG = 0
 AC_BLUE_FLAG = 1
 AC_YELLOW_FLAG = 2
@@ -38,6 +28,17 @@ SHOW_FLAG_NAME = False
 # Global variables
 flag_label = None
 appWindow = None
+
+
+def load_shared_libraries():
+    if platform.architecture()[0] == "64bit":
+      sysdir = "stdlib64"
+    else:
+      sysdir = "stdlib"
+
+    sys.path.insert(0, os.path.join(os.path.dirname(__file__), "lib", sysdir))
+    sys.path.insert(0, os.path.join(os.path.dirname(__file__), "lib"))
+    os.environ['PATH'] = os.environ['PATH'] + ";."
     
 
 def flag_to_name(flag_value):
@@ -80,16 +81,23 @@ def set_bg_texture_by_flag(appWindow, flag_value):
     texture_path = TEXTURE_DIR + texture_file
     
     ac.setBackgroundTexture(appWindow, texture_path)
+
+
+def set_flag_label_by_flag(flag_label, flag_value):
+    if SHOW_FLAG_NAME:
+        ac.setText(flag_label, flag_to_name(flag_value))
     
     
 def acMain(ac_version):
-    global test_label, appWindow
+    global flag_label, appWindow
 
+    # Initialise app
     appWindow = ac.newApp(APP_NAME)
     ac.setSize(appWindow, WINDOW_WIDTH, WINDOW_HEIGHT)
     ac.drawBorder(appWindow, 0)
     ac.setBackgroundOpacity(appWindow, 0)
 
+    # Add flag label text widget
     flag_label = ac.addLabel(appWindow, "")
     ac.setPosition(flag_label, 3, 30)
     
@@ -100,6 +108,6 @@ def acUpdate(deltaT):
     global flag_label, appWindow
 
     flag = info.graphics.flag
+
     set_bg_texture_by_flag(appWindow, flag)
-    if SHOW_FLAG_NAME:
-        ac.setText(flag_label, flag_to_name(flag))
+    set_flag_label_by_flag(flag_label, flag)
