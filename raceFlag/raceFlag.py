@@ -1,8 +1,6 @@
 import ac
 import acsys
-import os
-import platform
-import sys
+from utils import load_shared_libraries
 load_shared_libraries()
 from sim_info import info
 
@@ -28,17 +26,6 @@ SHOW_FLAG_NAME = False
 # Global variables
 flag_label = None
 appWindow = None
-
-
-def load_shared_libraries():
-    if platform.architecture()[0] == "64bit":
-      sysdir = "stdlib64"
-    else:
-      sysdir = "stdlib"
-
-    sys.path.insert(0, os.path.join(os.path.dirname(__file__), "lib", sysdir))
-    sys.path.insert(0, os.path.join(os.path.dirname(__file__), "lib"))
-    os.environ['PATH'] = os.environ['PATH'] + ";."
     
 
 def flag_to_name(flag_value):
