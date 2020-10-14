@@ -4,7 +4,7 @@ A simply race flag app for Assetto Corsa.
 
 ## Why is this useful?
 
-For VR users, the in-game race flag is located at the top-left bottom, which is out of the field while racing. This app acts as an redundant race flag indicator. This also adds the benefit of locating the position of the race flag as you wish.
+For VR users, the in-game race flag is located at the top-left bottom, which is out of the view while racing. This app acts as an redundant race flag indicator, with the additional benefit of ability to have race flag located anywwhere you wish. 
 
 ## Installation
 
