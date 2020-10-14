@@ -24,7 +24,8 @@ PADDING = 5
 # Configs
 WINDOW_WIDTH = 160
 WINDOW_HEIGHT = 120
-BACKGROUND_OPACITY = 0.3
+NO_FLAG_BACKGROUND_OPACITY = 0.25
+FLAG_BACKGROUND_OPACITY = 0.8
 
 # Generate flags
 Flag = collections.namedtuple("Flag", ["name", "texture"])
@@ -52,7 +53,7 @@ def acMain(ac_version):
     ac.setIconPosition(appWindow, 0, -999999)
     ac.setTitle(appWindow, " ")
     ac.drawBorder(appWindow, 0)
-    ac.setBackgroundOpacity(appWindow, BACKGROUND_OPACITY)
+    ac.setBackgroundOpacity(appWindow, NO_FLAG_BACKGROUND_OPACITY)
     ac.addRenderCallback(appWindow, onWindowRender)
 
     # Load flag textures
@@ -66,7 +67,7 @@ def acMain(ac_version):
 def acUpdate(deltaT):
     global appWindow
 
-    ac.setBackgroundOpacity(appWindow, BACKGROUND_OPACITY)
+    ac.setBackgroundOpacity(appWindow, NO_FLAG_BACKGROUND_OPACITY)
 
 
 def onWindowRender(deltaT):
@@ -74,6 +75,6 @@ def onWindowRender(deltaT):
 
     flag_value = info.graphics.flag
     texture_id = flag_textures[flag_value]
-    ac.glColor4f(1.0, 1.0, 1.0, BACKGROUND_OPACITY)
+    ac.glColor4f(1.0, 1.0, 1.0, FLAG_BACKGROUND_OPACITY)
     ac.glQuadTextured(0, 0, WINDOW_WIDTH, WINDOW_HEIGHT, texture_id)
 
