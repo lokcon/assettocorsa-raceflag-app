@@ -22,6 +22,7 @@ TEXTURE_DIR = "apps/python/raceFlag/textures/"
 WINDOW_WIDTH = 160
 WINDOW_HEIGHT = 120
 SHOW_FLAG_NAME = False
+BACKGROUND_OPACITY = 0.1
 
 # Global variables
 flag_label = None
@@ -68,6 +69,7 @@ def set_bg_texture_by_flag(appWindow, flag_value):
     texture_path = TEXTURE_DIR + texture_file
     
     ac.setBackgroundTexture(appWindow, texture_path)
+    ac.setBackgroundOpacity(appWindow, BACKGROUND_OPACITY)
 
 
 def set_flag_label_by_flag(flag_label, flag_value):
@@ -82,11 +84,15 @@ def acMain(ac_version):
     appWindow = ac.newApp(APP_NAME)
     ac.setSize(appWindow, WINDOW_WIDTH, WINDOW_HEIGHT)
     ac.drawBorder(appWindow, 0)
-    ac.setBackgroundOpacity(appWindow, 0)
+    ac.setBackgroundOpacity(appWindow, BACKGROUND_OPACITY)
 
     # Add flag label text widget
     flag_label = ac.addLabel(appWindow, "")
     ac.setPosition(flag_label, 3, 30)
+
+    # Test texture
+    # texture = ac.newTexture(TEXTURE_DIR + "blue.png")
+    # ac.setPosition(texture, 0, 30)
     
     return APP_NAME
     
